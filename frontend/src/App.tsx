@@ -20,7 +20,7 @@ function App() {
 	);
 	const [showCopyButton, setShowCopyButton] = useState<boolean>(false);
 	const recorderControls = useAudioRecorder();
-
+	const apiUrl = import.meta.env.VITE_BACKEND_URL;
 	const handleCopyText = useCallback(() => {
 		navigator.clipboard.writeText(transcriptionText).then(
 			() => {
@@ -70,10 +70,9 @@ function App() {
 	const handleTranscribeAudio = async () => {
 		setIsTranscribing(true); // Start indicating transcription process
 		try {
-			const transcriptionResponse = await fetch(
-				"http://127.0.0.1:5000/transcribe",
-				{ method: "GET" }
-			);
+			const transcriptionResponse = await fetch(`${apiUrl}/transcribe`, {
+				method: "GET",
+			});
 			const transcriptionData = await transcriptionResponse.json();
 			if (transcriptionResponse.ok) {
 				setTranscriptionText(
@@ -96,7 +95,7 @@ function App() {
 		const formData = new FormData();
 		formData.append("file", blob, "recording.webm");
 		try {
-			await fetch("http://127.0.0.1:5000/upload", {
+			await fetch(`${apiUrl}/upload`, {
 				method: "POST",
 				body: formData,
 			});
