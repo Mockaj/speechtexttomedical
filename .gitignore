@@ -1,0 +1,101 @@
+# General
+*.log
+*.env
+*.pyc
+__pycache__/
+.DS_Store
+Thumbs.db
+
+# Backend specific
+backend/venv/
+backend/uploads/
+backend/.env
+
+# Frontend specific
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Operating System generated files
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# Python
+db.sqlite3
+*.pyo
+*.pyd
+.Python
+pip-log.txt
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+cover/
+instance/
+.webassets-cache
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# dotenv
+.env
+.env.test
+
+# virtualenv
+venv/
+ENV/
+env/
+*.env
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+
+# Frontend/tooling specific
+/public/build/
+.npm
+.eslintcache
+.prettierrc
+.vite/
+*.local
+
+# Lock files
+yarn.lock
+package-lock.json
+
+# Compiled TypeScript
+*.tsbuildinfo
+
+# TypeScript declaration files
+*.d.ts
+
+# Typings, if you don't want to share them
+typings/

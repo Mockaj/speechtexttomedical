@@ -1,0 +1,126 @@
+#root {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 2rem;
+	text-align: center;
+}
+
+.logo {
+	height: 6em;
+	padding: 1.5em;
+	will-change: filter;
+	transition: filter 300ms;
+}
+.logo:hover {
+	filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+	filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	a:nth-of-type(2) .logo {
+		animation: logo-spin infinite 20s linear;
+	}
+}
+
+.card {
+	padding: 2em;
+}
+
+.read-the-docs {
+	color: #888;
+}
+
+.App {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+.App-header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.transcription-container {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.transcription-area {
+	flex: 2;
+	margin: 20px;
+	resize: none;
+	padding: 10px;
+	padding-right: 20px;
+	font-size: 16px;
+	width: 40vw;
+	min-height: 30vh;
+}
+
+.copy-button {
+	position: absolute;
+	top: 25px; /* Adjust as needed */
+	right: 25px; /* Adjust as needed */
+	padding: 5px;
+	cursor: pointer;
+	border: none;
+	border-radius: 5px;
+	background-color: rgb(
+		0,
+		0,
+		0
+	); /* Consider making the background transparent */
+}
+
+.copy-button:hover {
+	border: 1px solid white;
+}
+
+.App-footer {
+	flex: 0;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	padding: 20px;
+}
+
+.control-button:disabled {
+	background-color: #ccc;
+	cursor: not-allowed;
+}
+.control-button {
+	padding: 10px 20px;
+	font-size: 20px; /* Adjust font size as needed */
+	cursor: pointer;
+	border: none;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 0.3s ease;
+	border: 1px solid #ccc;
+}
+
+.control-button svg {
+	margin-right: 5px; /* Adds spacing between icon and text if you include text */
+}
+
+.audio-recorder {
+	display: none !important;
+}
