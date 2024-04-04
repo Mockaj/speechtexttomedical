@@ -98,7 +98,7 @@ package-lock.json
 *.tsbuildinfo
 
 # TypeScript declaration files
-*.d.ts
+
 
 # Typings, if you don't want to share them
 typings/
