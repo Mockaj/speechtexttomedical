@@ -4,6 +4,7 @@ import {
 	faPlay,
 	faStop,
 	faPause,
+	faRefresh,
 	faMicrophone,
 	faCopy,
 	faCheck,
@@ -66,6 +67,11 @@ function App() {
 			window.removeEventListener("keydown", handleKeyDown);
 		};
 	}, [transcriptionText, handleCopyText]);
+
+	const handleStartRecording = () => {
+		setTranscriptionText("");
+		recorderControls.startRecording();
+	};
 
 	const handleTranscribeAudio = async () => {
 		setIsTranscribing(true); // Start indicating transcription process
@@ -158,12 +164,15 @@ function App() {
 						</button>
 					</>
 				) : (
-					<button
-						onClick={() => recorderControls.startRecording()}
-						className="control-button">
+					<button onClick={handleStartRecording} className="control-button">
 						<FontAwesomeIcon icon={faPlay} /> Start Recording
 					</button>
 				)}
+				<button
+					onClick={() => setTranscriptionText("")}
+					className="control-button">
+					<FontAwesomeIcon icon={faRefresh} /> Clear Text
+				</button>
 			</footer>
 		</div>
 	);
