@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
 from openai import OpenAI
-
+from medications import medications
 load_dotenv()
 api_key = os.getenv('OPENAI_API_KEY')
 client = OpenAI(api_key=api_key)
@@ -49,7 +49,7 @@ def transcribe_audio():
                 file=audio_file,
                 response_format="text",
                 language="cs",
-                prompt="Tobradex, Maxitrol, Lumigan, Pataday, Xalatan, Systane"
+                prompt=medications
             )
 
             postprocessed_text = postprocess_text(transcription)
@@ -66,8 +66,7 @@ def postprocess_text(text: str) -> dict:
         temperature=0.0,
         messages=[
             {"role": "system", "content": """Jsi profesionální copywriter a tvůj úkol je opravit překlepy a gramatické chyby v následujícím textu.
-             Text se týká oftalmologie a obsahuje odborné výrazy. Ujisti se, že obzvláště tyto léky a oční kapky jsou správně napsány:
-             Tobradex, Maxitrol, Lumigan, Pataday, Xalatan, Systane.
+             Text obsahuje diagnózu od oftalmologa a obsahuje odborné výrazy.
              Pokud v textu bude zmínka o doporučeních, chci aby jsi vrátil v jsonu také klíč "recommendations" a hodnotou s polem jednotlivých doporučení.
              Vracej json ve formátu {"text": "opravený text", "recommendations": [doporučení]. Pokud v textu nebude žádná zmínka
              o doporučeních, vracej pro klíč recommendations prázdné pole. V případě, že se v textu zmínka o doporučení vyskytne, neuváděj
