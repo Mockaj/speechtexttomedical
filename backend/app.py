@@ -61,17 +61,52 @@ def transcribe_audio():
 
 def postprocess_text(text: str) -> dict:
     completion = client.chat.completions.create(
-        model="gpt-4-turbo-preview",  # gpt-3.5-turbo, gpt-4-turbo-preview
+        model="gpt-4o",  # gpt-3.5-turbo, gpt-4-turbo-preview
         response_format={"type": "json_object"},
-        temperature=0.0,
+        temperature=0.3,
         messages=[
-            {"role": "system", "content": """Jsi profesionální copywriter a tvůj úkol je opravit překlepy a gramatické chyby v následujícím textu.
-             Text obsahuje diagnózu od oftalmologa a obsahuje odborné výrazy.
-             Pokud v textu bude zmínka o doporučeních, chci aby jsi vrátil v jsonu také klíč "recommendations" a hodnotou s polem jednotlivých doporučení.
-             Vracej json ve formátu {"text": "opravený text", "recommendations": [doporučení]. Pokud v textu nebude žádná zmínka
-             o doporučeních, vracej pro klíč recommendations prázdné pole. V případě, že se v textu zmínka o doporučení vyskytne, neuváděj
-             tuto část ve výsledné hodnotě pro klíč "text".} V případě, že si u některého slova jistý, může ho nechat nezměněné. Odpovídej POUZE V ČEŠTINĚ."""},
-            {"role": "user", "content": "Zde je zmíněný text: " + text}
+            {"role": "system", "content": """
+__ASK__
+You are a professional copywriter tasked with correcting misspellings and grammatical errors in a text containing an ophthalmologist's diagnosis. The text may include technical terms and recommendations. Your goal is to produce a corrected version of the text and extract any recommendations mentioned. 
+
+__CONTEXT__
+The text is in Czech language and is produced by speech to text conversion. The conversion is not entirely precise and thus there are some mistakes. It is your task to correct these mistakes. It is important to consider the fact that it is an ophtalmologist diagnosis that is included in the provided text so correct this mistakes in such a way that the diagnosis makes sense.
+
+__CONSTRAINTS__
+Follow these steps to complete the task:
+
+1. Carefully read through the entire text.
+
+2. Correct any misspellings and grammatical errors you find in the text. Pay close attention to sentence structure, punctuation, and word usage.
+
+3. When encountering technical terms related to ophthalmology, do not alter them unless you are absolutely certain they are misspelled. If you are unsure about a technical term, leave it unchanged.
+
+4. As you review the text, look for any mentions of recommendations. These might be introduced with phrases like "I recommend," "it is advised," or "the patient should."
+
+5. If you find any recommendations, extract them and prepare to list them separately.
+
+
+6. If there are no recommendations mentioned in the text, include an empty array for the "recommendations" key, like this:
+
+{
+  "text": "Your corrected version of the text goes here",
+  "recommendations": []
+}
+
+7. If you encounter any words that you are unsure about, especially if they might be technical terms, leave them unchanged in the corrected text.
+
+8. Ensure that the corrected text in the "text" field does not include the recommendations you've extracted. The recommendations should only appear in the "recommendations" array.
+
+9. Answer purely in Czech language!
+__OUTPUT_FORMAT__
+After correcting the text and identifying any recommendations, prepare your output in the following JSON format:
+
+{
+  "text": "Your corrected version of the text goes here, excluding any recommendations",
+  "recommendations": ["Recommendation 1", "Recommendation 2", "etc."]
+}
+"""},
+            {"role": "user", "content": "Prosím oprav podle instrukcí tento text: " + text}
         ]
     )
     response = completion.choices[0].message.content
