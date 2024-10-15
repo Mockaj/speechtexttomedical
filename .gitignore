@@ -1,15 +1,16 @@
 # General
 *.log
-*.env
+*.env*
 *.pyc
-__pycache__/
-.DS_Store
+*__pycache__/*
+*.DS_Stor*e
 Thumbs.db
 
 # Backend specific
 backend/venv/
-backend/uploads/
+backend/stt/uploads/
 backend/.env
+backend/.env.stt
 
 # Frontend specific
 frontend/node_modules/
