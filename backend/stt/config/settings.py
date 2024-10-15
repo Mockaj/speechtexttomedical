@@ -11,7 +11,6 @@ class Settings(BaseSettings):
     LANGCHAIN_ENDPOINT: str = Field(..., env='LANGCHAIN_ENDPOINT')
     LANGCHAIN_PROJECT: str = Field(..., env='LANGCHAIN_PROJECT')
     LANGCHAIN_API_KEY: str = Field(..., env='LANGCHAIN_API_KEY')
-    GROQ_API_KEY: str = Field(..., env='GROQ_API_KEY')
 
     model_config = SettingsConfigDict(env_file=os.getenv('ENV_FILE_STT', None))
 
